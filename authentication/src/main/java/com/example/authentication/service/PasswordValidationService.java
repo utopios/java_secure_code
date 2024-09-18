@@ -13,6 +13,8 @@ import java.util.Map;
 @Service
 public class PasswordValidationService {
 
+    private final MultiFactorAuthService mfaService;
+
     // Map pour stocker le mot de passe haché et le sel concaténé pour chaque utilisateur
     private Map<String, String> passwordHashes = new HashMap<>();
     private Map<String, Long> lastPasswordChange = new HashMap<>();
@@ -21,6 +23,10 @@ public class PasswordValidationService {
 
     // Durée d'inactivité avant de marquer un compte comme dormant (30 jours)
     private static final long DORMANT_THRESHOLD = 2592000000L; // 30 jours en millisecondes
+
+    public PasswordValidationService(MultiFactorAuthService mfaService) {
+        this.mfaService = mfaService;
+    }
 
     public enum Category {
         IMPORTANTE, CRITIQUE, HAUTEMENT_CRITIQUE
@@ -148,5 +154,30 @@ public class PasswordValidationService {
         // Vérifier la complexité : minuscule, majuscule, chiffre, caractère spécial
         String complexityPattern = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{6,}$";
         return password.matches(complexityPattern);
+    }
+
+    // Méthode MFA : Valider le mot de passe et le token OTP
+    public boolean validatePasswordWithMFA(String password, String token, Category category, String username) {
+        // 1. Valider le mot de passe
+        if (!validatePassword(password, category, username)) {
+            System.out.println("Mot de passe incorrect.");
+            return false;
+        }
+
+        // 2. Valider le token
+        if (!mfaService.validateToken(username, token)) {
+            System.out.println("Token MFA incorrect ou expiré.");
+            return false;
+        }
+
+        // Si tout est valide, mettre à jour l'activité de l'utilisateur
+        updateActivity(username);
+        return true;
+    }
+
+    // Exemple d'utilisation dans un flux d'authentification
+    public String requestMFA(String username) {
+        // Appeler cette méthode après avoir validé le mot de passe pour générer un token
+        return mfaService.generateToken(username);
     }
 }

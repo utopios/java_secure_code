@@ -1,0 +1,97 @@
+<configuration>
+    <!-- Log Appenders -->
+    <!-- Access logs -->
+    <appender name="ACCESS_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/access.log</file>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/access-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <!-- Error logs -->
+    <appender name="ERROR_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/error.log</file>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/error-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <!-- Debug logs -->
+    <appender name="DEBUG_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/debug.log</file>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/debug-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <!-- Audit logs -->
+    <appender name="AUDIT_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/audit.log</file>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/audit-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <!-- Regulatory logs -->
+    <appender name="REGULATORY_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/regulatory.log</file>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/regulatory-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <!-- Loggers based on categories -->
+    <!-- Access Logger -->
+    <logger name="com.example.access" level="INFO" additivity="false">
+        <appender-ref ref="ACCESS_LOG" />
+    </logger>
+
+    <!-- Error Logger -->
+    <logger name="com.example.error" level="ERROR" additivity="false">
+        <appender-ref ref="ERROR_LOG" />
+    </logger>
+
+    <!-- Debug Logger -->
+    <logger name="com.example.debug" level="DEBUG" additivity="false">
+        <appender-ref ref="DEBUG_LOG" />
+    </logger>
+
+    <!-- Audit Logger -->
+    <logger name="com.example.audit" level="INFO" additivity="false">
+        <appender-ref ref="AUDIT_LOG" />
+    </logger>
+
+    <!-- Regulatory Logger -->
+    <logger name="com.example.regulatory" level="INFO" additivity="false">
+        <appender-ref ref="REGULATORY_LOG" />
+    </logger>
+
+    <!-- Root Logger (if needed for general logs) -->
+    <root level="INFO">
+        <appender-ref ref="ACCESS_LOG" />
+        <appender-ref ref="ERROR_LOG" />
+        <appender-ref ref="DEBUG_LOG" />
+        <appender-ref ref="AUDIT_LOG" />
+        <appender-ref ref="REGULATORY_LOG" />
+    </root>
+</configuration>

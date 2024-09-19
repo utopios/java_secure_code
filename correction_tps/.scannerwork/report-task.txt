@@ -1,0 +1,6 @@
+projectKey=demo_secure_code
+serverUrl=http://localhost:9000
+serverVersion=10.6.0.92116
+dashboardUrl=http://localhost:9000/dashboard?id=demo_secure_code
+ceTaskId=6d5d112d-76f1-4f03-b487-8fc653a20bfc
+ceTaskUrl=http://localhost:9000/api/ce/task?id=6d5d112d-76f1-4f03-b487-8fc653a20bfc

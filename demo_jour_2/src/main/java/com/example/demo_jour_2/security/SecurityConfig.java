@@ -18,6 +18,10 @@ public class SecurityConfig  {
                         .contentSecurityPolicy(policy -> policy
                                 .policyDirectives("default-src 'self'; script-src 'self' https://trusted-cdn.com;").reportOnly())
                 )
+                .authorizeHttpRequests(authz -> authz
+
+                        .anyRequest().permitAll()
+                )
         ;
 
         return http.build();

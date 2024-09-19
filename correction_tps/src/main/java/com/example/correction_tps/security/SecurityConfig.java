@@ -56,7 +56,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authz -> authz
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/superadmin/**").hasRole("SUPER_ADMIN")
-                        .requestMatchers("/auth/**", "/register/**").permitAll()
+                        .requestMatchers("/auth/**", "/register/**", "/payment").permitAll()
                         .anyRequest().authenticated()
                 )
                 /*.formLogin(form -> form
@@ -66,7 +66,8 @@ public class SecurityConfig {
                         .permitAll()
                 )*/
                 .csrf(csrf -> csrf
-                        .csrfTokenRepository(csrfTokenRepository())
+                        .disable()
+                        //.csrfTokenRepository(csrfTokenRepository())
                 )
                 .logout(logout -> logout
                         .logoutUrl("/logout")

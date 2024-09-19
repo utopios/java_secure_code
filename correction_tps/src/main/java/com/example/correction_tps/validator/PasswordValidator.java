@@ -14,7 +14,7 @@ public class PasswordValidator {
     private static final String HIGHLY_CRITICAL_PATTERN = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{14,}$"; // Highly Critical
     private static final String[] DICTIONARY_WORDS = {"password", "123456", "qwerty", "admin"};
 
-    public static boolean validatePassword(String password, String level) {
+    public boolean validatePassword(String password, String level) {
         // Check for dictionary words or simple sequences
         if (containsDictionaryWord(password) || containsSimpleSequence(password)) {
             return false;

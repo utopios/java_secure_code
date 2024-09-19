@@ -19,7 +19,7 @@ Vous allez poursuivre le développement du système sécurisé en ajoutant un **
      - Session critique (transactionnelle) : 20 minutes.
      - Session hautement critique : 5 minutes.
 
-3. **Limitation des transactions par utilisateur** :
+3. **Limitation des transactions par utilisateur** : Bucket4j
    - Limiter le nombre de transactions qu’un utilisateur peut effectuer dans un intervalle de temps donné :
      - **Opérations normales** : 10 transactions toutes les 10 minutes.
      - **Opérations critiques (paiements, modifications majeures)** : 5 transactions par heure.

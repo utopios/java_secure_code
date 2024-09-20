@@ -1,5 +1,6 @@
 package com.example.correction_tps.controller;
 
+import com.example.correction_tps.annotation.Critical;
 import com.example.correction_tps.entity.User;
 import com.example.correction_tps.service.PasswordService;
 import com.example.correction_tps.service.RateLimitService;
@@ -65,12 +66,16 @@ public class UserController {
 
     // Opération critique (suppression de compte)
     @PostMapping("/delete-account")
+    @Critical
     public String deleteAccount(@RequestParam String username) {
-        if (rateLimitService.allowCriticalTransaction(username)) {
+        /*if (rateLimitService.allowCriticalTransaction(username)) {
             userService.deleteAccount(username);
             return "Account deleted successfully";
         } else {
             return "Rate limit exceeded for critical operations. Try again later.";
-        }
+        }*/
+
+        userService.deleteAccount(username);
+        return "Account deleted successfully";
     }
 }
